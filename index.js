@@ -2,8 +2,13 @@ const core = require('@actions/core');
 const github = require('@actions/github');
 
 try {
-  const branchToMergeFrom = github?.context?.payload?.head?.ref;
-  const branchToMergeInto = github?.context?.payload?.base?.ref;
+  if (!github.context.payload.pull_request) {
+    core.setFailed("This action can only be used in a pull request.");
+    return;
+  }
+
+  const branchToMergeFrom = github.context.payload.pull_request.head.ref;
+  const branchToMergeInto = github.context.payload.pull_request.base.ref;
   const stagingName = core.getInput('stagingName') || 'staging';
   const mainName = core.getInput('mainName') || 'main';
 
