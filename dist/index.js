@@ -8446,15 +8446,8 @@ const core = __nccwpck_require__(2186);
 const github = __nccwpck_require__(5438);
 
 try {
-<<<<<<< HEAD
-  const payload = JSON.stringify(github.context.payload, undefined, 2);
-  console.log(payload);
-  const branchToMergeFrom = github.context.payload.head.ref;
-  const branchToMergeInto = github.context.payload.base.ref;
-=======
   const branchToMergeFrom = github?.context?.payload?.head?.ref;
   const branchToMergeInto = github?.context?.payload?.base?.ref;
->>>>>>> pr-5
   const stagingName = core.getInput('stagingName') || 'staging';
   const mainName = core.getInput('mainName') || 'main';
 
