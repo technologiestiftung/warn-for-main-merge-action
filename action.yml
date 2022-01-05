@@ -1,13 +1,5 @@
 name: 'Warn for main merge in PR'
 description: 'A Github Action that adds a comment to a PR when a non-staging branch is the source and main the target'
-inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
-    required: true
-    default: 'World'
-outputs:
-  time: # id of output
-    description: 'The time we greeted you'
 runs:
   using: 'node12'
   main: 'dist/index.js'

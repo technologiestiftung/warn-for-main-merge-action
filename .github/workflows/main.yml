@@ -1,14 +1,11 @@
-on: [push]
+on:
+  pull_request:
+   types: [opened, synchronize, reopened]
 
 jobs:
   warn_main_merge:
     runs-on: 'ubuntu-latest'
-    name: 'Warn Main Merge'
+    name: 'Validate PR Source and Target Branches'
     steps:
-      - name: 'Hello world action step'
-        id: 'hello'
+      - name: 'Checking source and target branch in PR'
         uses: 'technologiestiftung/warn-for-main-merge-action@v1.4'
-        with:
-          who-to-greet: 'Lucas'
-      - name: 'Get the output time'
-        run: 'echo "The time was ${{ steps.hello.outputs.time }}"'
