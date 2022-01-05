@@ -1,7 +1,4 @@
-on:
-  pull_request:
-   types: [opened, synchronize, reopened]
-
+on: pull_request
 jobs:
   warn_main_merge:
     runs-on: 'ubuntu-latest'
