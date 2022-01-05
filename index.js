@@ -2,13 +2,15 @@ const core = require('@actions/core');
 const github = require('@actions/github');
 
 try {
-  const payload = JSON.stringify(github.context.payload, undefined, 2);
-  console.log(payload);
-  const branchToMergeFrom = github.context.payload.head.ref;
-  const branchToMergeInto = github.context.payload.base.ref;
+  const branchToMergeFrom = github?.context?.payload?.head?.ref;
+  const branchToMergeInto = github?.context?.payload?.base?.ref;
   const stagingName = core.getInput('stagingName') || 'staging';
   const mainName = core.getInput('mainName') || 'main';
 
+  if (!branchToMergeFrom || !branchToMergeInto) {
+    const payload = JSON.stringify(github.context.payload, undefined, 2)
+    core.setFailed(`Could not determine branch to merge from or into. Payload: ${payload}`);
+  }
   if (branchToMergeInto !== mainName) {
     console.log('Valid: Not merging into main.');
     return;
