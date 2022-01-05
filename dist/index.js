@@ -8446,14 +8446,27 @@ const core = __nccwpck_require__(2186);
 const github = __nccwpck_require__(5438);
 
 try {
-  // `who-to-greet` input defined in action metadata file
-  const nameToGreet = core.getInput('who-to-greet');
-  console.log(`Hello ${nameToGreet}!`);
-  const time = (new Date()).toTimeString();
-  core.setOutput("time", time);
-  // Get the JSON webhook payload for the event that triggered the workflow
   const payload = JSON.stringify(github.context.payload, undefined, 2)
-  console.log(`The event payload: ${payload}`);
+  const branchToMergeFrom = payload.head.ref;
+  const branchToMergeInto = payload.base.ref;
+  const stagingName = core.getInput('stagingName') || 'staging';
+  const mainName = core.getInput('mainName') || 'main';
+
+  if (branchToMergeInto !== mainName) {
+    console.log('Valid: Not merging into main.');
+    return;
+  }
+  if (branchToMergeFrom === stagingName) {
+    console.log('Valid: Merging staging into main.');
+    return;
+  }
+  core.setFailed(
+    "Attempting to merge from \"" +
+    branchToMergeFrom + "\" into \"" + branchToMergeInto +
+    "\", which is the default branch. This is not allowed." +
+    " Please merge into \"" + stagingName + "\" first, and then \"" +
+    stagingName + "\" into \"" + mainName + "\"."
+  );
 } catch (error) {
   core.setFailed(error.message);
 }
