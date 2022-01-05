@@ -4,7 +4,7 @@
   "description": "A Github Action that adds a comment to a PR when a non-staging branch is the source and main the target",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "ncc build index.js --license licenses.txt"
   },
   "repository": {
     "type": "git",
@@ -20,5 +20,8 @@
   "dependencies": {
     "@actions/core": "1.6.0",
     "@actions/github": "5.0.0"
+  },
+  "devDependencies": {
+    "@vercel/ncc": "0.33.1"
   }
 }
