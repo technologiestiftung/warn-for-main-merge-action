@@ -8,4 +8,4 @@ jobs:
     name: 'Validate PR Source and Target Branches'
     steps:
       - name: 'Checking source and target branch in PR'
-        uses: 'technologiestiftung/warn-for-main-merge-action@v1.9'
+        uses: 'technologiestiftung/warn-for-main-merge-action@v1.10'

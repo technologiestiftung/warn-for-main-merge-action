@@ -8446,30 +8446,32 @@ const core = __nccwpck_require__(2186);
 const github = __nccwpck_require__(5438);
 
 try {
-  const branchToMergeFrom = github?.context?.payload?.head?.ref;
-  const branchToMergeInto = github?.context?.payload?.base?.ref;
-  const stagingName = core.getInput('stagingName') || 'staging';
-  const mainName = core.getInput('mainName') || 'main';
+  const payload = JSON.stringify(github.context.payload, undefined, 2)
+  core.setFailed(`Payload: ${payload}`);
+  // const branchToMergeFrom = github?.context?.payload?.head?.ref;
+  // const branchToMergeInto = github?.context?.payload?.base?.ref;
+  // const stagingName = core.getInput('stagingName') || 'staging';
+  // const mainName = core.getInput('mainName') || 'main';
 
-  if (!branchToMergeFrom || !branchToMergeInto) {
-    const payload = JSON.stringify(github.context.payload, undefined, 2)
-    core.setFailed(`Could not determine branch to merge from or into. Payload: ${payload}`);
-  }
-  if (branchToMergeInto !== mainName) {
-    console.log('Valid: Not merging into main.');
-    return;
-  }
-  if (branchToMergeFrom === stagingName) {
-    console.log('Valid: Merging staging into main.');
-    return;
-  }
-  core.setFailed(
-    "Attempting to merge from \"" +
-    branchToMergeFrom + "\" into \"" + branchToMergeInto +
-    "\", which is the default branch. This is not allowed." +
-    " Please merge into \"" + stagingName + "\" first, and then \"" +
-    stagingName + "\" into \"" + mainName + "\"."
-  );
+  // if (!branchToMergeFrom || !branchToMergeInto) {
+  //   const payload = JSON.stringify(github.context.payload, undefined, 2)
+  //   core.setFailed(`Could not determine branch to merge from or into. Payload: ${payload}`);
+  // }
+  // if (branchToMergeInto !== mainName) {
+  //   console.log('Valid: Not merging into main.');
+  //   return;
+  // }
+  // if (branchToMergeFrom === stagingName) {
+  //   console.log('Valid: Merging staging into main.');
+  //   return;
+  // }
+  // core.setFailed(
+  //   "Attempting to merge from \"" +
+  //   branchToMergeFrom + "\" into \"" + branchToMergeInto +
+  //   "\", which is the default branch. This is not allowed." +
+  //   " Please merge into \"" + stagingName + "\" first, and then \"" +
+  //   stagingName + "\" into \"" + mainName + "\"."
+  // );
 } catch (error) {
   core.setFailed(error.message);
 }
