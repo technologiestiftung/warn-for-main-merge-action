@@ -7,7 +7,7 @@ jobs:
     steps:
     - name: 'Hello world action step'
       id: 'hello'
-      uses: 'technologiestiftung/warn-for-main-merge-action'
+      uses: 'technologiestiftung/warn-for-main-merge-action@v1.1'
       with:
         who-to-greet: 'Lucas'
     - name: 'Get the output time'
