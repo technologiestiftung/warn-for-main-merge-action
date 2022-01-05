@@ -9,6 +9,7 @@ This action takes 2 inputs:
 To use in your repo, create a file in `/.github/workflows/warnForPRIntoMain.yml` like so:
 
 ```yml
+name: 'Prevent merge from non-staging to main'
 on:
   pull_request:
     types: [opened, synchronize, reopened]
