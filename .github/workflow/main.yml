@@ -1,6 +1,6 @@
 on:
   pull_request:
-   types: [opened, synchronize, reopened]
+    types: [opened, synchronize, reopened]
 
 jobs:
   warn_main_merge:
