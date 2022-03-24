@@ -1,4 +1,6 @@
-# Allow only staging/develop to merge into default/main/master branch
+![](https://img.shields.io/badge/Build%20with%20%E2%9D%A4%EF%B8%8F-at%20Technologiesitftung%20Berlin-blue)
+
+# GitHub Action: Allow only staging/develop to merge into default/main/master branch
 This Github Action fails when a PR from a non-staging branch into main is attempted.
 This ensures that all branches excepted the staging branch are directly merged into the default/main branch.
 
